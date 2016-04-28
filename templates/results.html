@@ -91,12 +91,13 @@
 
 					<h1>Suggestion for your Choices </h1>
 					<br><br><center>
-							In order of priority: <br><br>
+<div align="left">
+							In order of priority: (with scores)<br><br>
 					
                         {% for eachtopic in data%}
                       <label >{{eachtopic.subject}} : {{eachtopic.sumweight}} </label><br>
                    {%endfor%}
-				
+</div>				
 					</div>
 					
 					<div class="center bottommargin">
