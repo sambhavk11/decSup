@@ -12,6 +12,7 @@ def showMain(request):
 
 def loaddetails(request):
     param=request.GET['param']
+    request.session['sess_topic']=param
     data=decapp.models.Category.objects.filter(topic=param).values('area').distinct()
     print data
     print param
@@ -27,5 +28,5 @@ def calculateWeight(request):
         listset.append(paramset[i])
         i=i+1
     print listset
-    datasubject = decapp.models.Category.objects.filter(area__in=paramset).values('subject').annotate(sumweight=Sum('weight')).order_by('-sumweight')
+    datasubject = decapp.models.Category.objects.filter(topic=request.session['sess_topic']).filter(area__in=paramset).values('subject').annotate(sumweight=Sum('weight')).order_by('-sumweight')
     return render(request,'results.html',{'data':datasubject})
